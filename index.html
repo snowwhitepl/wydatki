@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Wydatki</title>
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=League+Spartan:wght@700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<main class="app">
+<section class="card">
+<header class="card__bar">
+<h1 class="card__title">WYDATKI</h1>
+</header>
+
+<!-- ✅ novalidate, żeby nie blokowało submitu -->
+<form id="form" class="form" autocomplete="off" novalidate>
+<div class="row">
+<label>Kwota (PLN)
+<!-- ✅ type=text + inputmode + pattern -->
+<input id="amount"
+type="text"
+inputmode="decimal"
+pattern="[0-9]+([,.][0-9]{1,2})?"
+placeholder="0,00"
+required />
+</label>
+<label>Kategoria
+<select id="category">
+<option>Jedzenie</option>
+<option>Transport</option>
+<option>Rachunki</option>
+<option>Zakupy</option>
+<option>Zdrowie</option>
+<option>Inne</option>
+</select>
+</label>
+</div>
+
+<div class="row">
+<label>Data
+<input id="date" type="date" />
+</label>
+<label>Notatka
+<input id="note" type="text" maxlength="60" placeholder="opcjonalnie" />
+</label>
+</div>
+
+<div class="actions">
+<button type="submit" class="btn primary">Dodaj</button>
+<button type="button" id="clearAll" class="btn ghost">Wyczyść wszystko</button>
+<button type="button" id="exportBtn" class="btn ghost">Eksport JSON</button>
+<label class="import-label btn ghost">
+Import JSON
+<input id="importInput" type="file" accept="application/json" hidden />
+</label>
+</div>
+</form>
+
+<div class="summary">
+<div><strong>Suma:</strong> <span id="total">0,00 zł</span></div>
+<div class="filter">
+<label>Miesiąc:
+<select id="monthFilter">
+<option value="all">Wszystkie</option>
+</select>
+</label>
+</div>
+</div>
+
+<ul id="list" class="list" aria-live="polite"></ul>
+</section>
+</main>
+
+<template id="itemTemplate">
+<li class="item">
+<div class="item__main">
+<div class="item__line1">
+<span class="item__amount"></span>
+<span class="item__category"></span>
+</div>
+<div class="item__line2">
+<span class="item__date"></span>
+<span class="item__note"></span>
+</div>
+</div>
+<button class="item__delete" title="Usuń">×</button>
+</li>
+</template>
+
+<script src="app.js"></script>
+</body>
+</html>
