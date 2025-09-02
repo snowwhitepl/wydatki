@@ -1,89 +1,167 @@
-:root{
-    --ink:#232523; /* treść – podany przez Ciebie */
-    --bg:#4FA45A; /* tło zielone – łatwo zmienisz odcień */
-    --panel:#F2F2F3; /* jasny panel */
-    --bar:#E3C44F; /* złota listwa */
-    --muted:#6C6C6C;
-    --line:#E5E5E7;
-    --white:#fff;
-    }
-    
-    /* —— reset skrócony —— */
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0}
-    body{font-family:"Inter",system-ui,Arial,sans-serif;color:var(--ink);background:var(--bg);}
-    
-    /* —— layout —— */
-    .app{min-height:100%;display:grid;place-items:center;padding:24px}
-    .card{
-    width:min(760px, 94vw);
-    background:var(--panel);
-    border-radius:12px;
-    box-shadow:0 10px 30px rgba(0,0,0,.15);
-    overflow:hidden;
-    }
-    .card__bar{
-    background:var(--bar);
-    padding:18px 20px;
-    }
-    .card__title{
-    font: 800 28px/1 "League Spartan", system-ui, sans-serif;
-    letter-spacing:.06em;
-    margin:0;
-    }
-    
-    /* —— formularz —— */
-    .form{padding:18px 20px 10px}
-    .row{display:grid;gap:14px;grid-template-columns:1fr 1fr;margin-bottom:14px}
-    label{font-weight:600;font-size:14px;display:flex;flex-direction:column;gap:8px}
-    input,select{
-    border:1px solid var(--line);
-    border-radius:10px;
-    padding:12px 14px;
-    font:inherit;
-    color:var(--ink);
-    background:var(--white);
-    }
-    input::placeholder{color:#999}
-    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
-    .btn{
-    border:1px solid transparent;
-    border-radius:10px;
-    padding:10px 14px;
-    font-weight:600;
-    cursor:pointer;
-    }
-    .btn.primary{background:var(--ink);color:var(--white)}
-    .btn.ghost{background:transparent;border-color:var(--ink);color:var(--ink)}
-    .import-label{display:inline-grid;place-items:center}
-    
-    /* —— podsumowanie / filtr —— */
-    .summary{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:14px 20px;border-top:1px solid var(--line);
-    }
-    .summary strong{font-weight:700}
-    .filter select{margin-left:8px}
-    
-    /* —— lista —— */
-    .list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-    .item{
-    display:flex;align-items:center;justify-content:space-between;
-    gap:12px;padding:14px 20px;border-bottom:1px solid var(--line);
-    }
-    .item__line1{display:flex;gap:10px;align-items:baseline}
-    .item__amount{font-weight:700}
-    .item__category{color:var(--muted)}
-    .item__line2{display:flex;gap:12px;color:var(--muted);font-size:13px}
-    .item__note{max-width:44ch;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .item__delete{
-    border:none;background:transparent;color:#B00020;
-    font-size:22px;line-height:1;padding:6px 10px;border-radius:8px;cursor:pointer;
-    }
-    .item__delete:hover{background:#ffe9ec}
-    
-    /* —— responsywność —— */
-    @media (max-width:640px){
-    .row{grid-template-columns:1fr}
-    .card__title{font-size:24px}
-    }
+:root {
+--ink: #232523; /* treść */
+--bg: #4FA45A; /* tło zielone */
+--panel: #F2F2F3; /* jasny panel */
+--bar: #E3C44F; /* złota listwa */
+--muted: #6C6C6C;
+--line: #E5E5E7;
+--white: #fff;
+}
+
+/* —— RESET —— */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+font-family: "Inter", system-ui, Arial, sans-serif;
+color: var(--ink);
+background: var(--bg);
+-webkit-font-smoothing: antialiased;
+}
+
+/* —— LAYOUT —— */
+.app {
+min-height: 100svh; /* iOS 16+ */
+min-height: 100dvh; /* nowoczesne przeglądarki */
+min-height: 100vh; /* fallback */
+width: 100%;
+display: grid;
+place-items: center; /* centrowanie */
+place-content: center; /* dopięcie dla Safari */
+padding: clamp(16px, 3vw, 24px);
+}
+
+.card {
+width: min(760px, 94vw);
+margin-inline: auto;
+background: var(--panel);
+border-radius: 12px;
+box-shadow: 0 10px 30px rgba(0,0,0,.15);
+overflow: hidden;
+}
+
+/* —— GÓRNA LISTWA —— */
+.card__bar {
+background: var(--bar);
+padding: 18px 20px;
+}
+
+.card__title {
+font: 800 28px/1 "League Spartan", system-ui, sans-serif;
+letter-spacing: .06em;
+margin: 0;
+}
+
+/* —— FORMULARZ —— */
+.form { padding: 18px 20px 10px; }
+.row {
+display: grid;
+gap: 14px;
+grid-template-columns: 1fr 1fr;
+margin-bottom: 14px;
+}
+
+label {
+font-weight: 600;
+font-size: 14px;
+display: flex;
+flex-direction: column;
+gap: 8px;
+}
+
+input, select {
+border: 1px solid var(--line);
+border-radius: 10px;
+padding: 12px 14px;
+font: inherit;
+color: var(--ink);
+background: var(--white);
+font-size: 16px; /* iOS: brak auto-zoomu */
+}
+
+input::placeholder { color: #999; }
+
+.actions {
+display: flex;
+flex-wrap: wrap;
+gap: 10px;
+margin-top: 6px;
+}
+
+.btn {
+border: 1px solid transparent;
+border-radius: 10px;
+padding: 10px 14px;
+font-weight: 600;
+cursor: pointer;
+}
+
+.btn.primary { background: var(--ink); color: var(--white); }
+.btn.ghost { background: transparent; border-color: var(--ink); color: var(--ink); }
+
+.import-label { display: inline-grid; place-items: center; }
+
+/* —— PODSUMOWANIE + FILTR —— */
+.summary {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 14px 20px;
+border-top: 1px solid var(--line);
+}
+
+.summary strong { font-weight: 700; }
+.filter select { margin-left: 8px; }
+
+/* —— LISTA WYDATKÓW —— */
+.list {
+list-style: none;
+margin: 0;
+padding: 0;
+border-top: 1px solid var(--line);
+}
+
+.item {
+display: flex;
+align-items: center;
+justify-content: space-between;
+gap: 12px;
+padding: 14px 20px;
+border-bottom: 1px solid var(--line);
+}
+
+.item__line1 { display: flex; gap: 10px; align-items: baseline; }
+.item__amount { font-weight: 700; }
+.item__category { color: var(--muted); }
+
+.item__line2 {
+display: flex;
+gap: 12px;
+color: var(--muted);
+font-size: 13px;
+}
+
+.item__note {
+max-width: 44ch;
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+}
+
+.item__delete {
+border: none;
+background: transparent;
+color: #B00020;
+font-size: 22px;
+line-height: 1;
+padding: 6px 10px;
+border-radius: 8px;
+cursor: pointer;
+}
+
+.item__delete:hover { background: #ffe9ec; }
+
+/* —— RESPONSYWNOŚĆ —— */
+@media (max-width: 640px) {
+.row { grid-template-columns: 1fr; }
+.card__title { font-size: 24px; }
+}
